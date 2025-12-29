@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, Sparkles, Key, Settings, History } from 'lucide-react';
+import { BookOpen, Sparkles, HelpCircle, Settings, History, Key } from 'lucide-react';
 
 interface NavbarProps {
   onReset: () => void;
