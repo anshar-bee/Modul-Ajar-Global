@@ -20,18 +20,33 @@ export const NotificationModal: React.FC<NotificationModalProps> = ({
 
   // Helper function to render text with clickable links
   const renderMessageWithLinks = (text: string) => {
-    // Regex to capture URLs starting with http:// or https://
-    const urlRegex = /(https?:\/\/[^\s]+)/g;
-    // Split the text by the regex (capturing groups are included in the result array)
+    // Regex: Mencari teks yang tidak mengandung spasi (\S+), 
+    // memiliki titik di tengah (\.), dan diikuti teks tanpa spasi lagi (\S+).
+    // Contoh match: "s.id/abc", "google.com", "app.vercel.app"
+    const urlRegex = /((?:https?:\/\/)?\S+\.\S+)/g;
+    
+    // Split text berdasarkan regex (capturing group akan masuk ke array hasil split)
     const parts = text.split(urlRegex);
 
     return parts.map((part, index) => {
-      // Check if this part is a URL
+      // Cek apakah bagian ini cocok dengan kriteria link kita
       if (part.match(urlRegex)) {
+        let href = part;
+        
+        // Logika menambahkan protokol:
+        // 1. Jika terdeteksi email (ada @), gunakan mailto:
+        if (part.includes('@') && !part.startsWith('mailto:')) {
+           href = `mailto:${part}`;
+        }
+        // 2. Jika bukan email dan belum ada http/https, tambahkan https://
+        else if (!part.startsWith('http://') && !part.startsWith('https://')) {
+           href = `https://${part}`;
+        }
+
         return (
           <a
             key={index}
-            href={part}
+            href={href}
             target="_blank"
             rel="noopener noreferrer"
             className="text-brand-600 hover:text-brand-800 underline decoration-brand-300 hover:decoration-brand-800 transition-colors font-medium break-words"
