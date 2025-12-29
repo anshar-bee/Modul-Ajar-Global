@@ -85,7 +85,6 @@ export const ModuleForm: React.FC<ModuleFormProps> = ({ onSubmit }) => {
               <option value="NIP">NIP</option>
               <option value="NIY">NIY</option>
               <option value="NUPTK">NUPTK</option>
-              <option value="Lainnya">Lainnya</option>
             </select>
           </div>
 
@@ -303,7 +302,6 @@ export const ModuleForm: React.FC<ModuleFormProps> = ({ onSubmit }) => {
               <option value="NIP">NIP</option>
               <option value="NIY">NIY</option>
               <option value="NUPTK">NUPTK</option>
-              <option value="Lainnya">Lainnya</option>
             </select>
           </div>
 
