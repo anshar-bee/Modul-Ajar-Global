@@ -3,11 +3,14 @@ import { ModuleFormData, GeneratedModule } from "../types";
 
 // Helper untuk mendapatkan Client AI dengan Key yang dinamis
 const getAIClient = () => {
-  // Menggunakan process.env.API_KEY sesuai panduan
-  const apiKey = process.env.API_KEY;
+  // 1. Cek apakah user menyimpan Custom Key di LocalStorage (dari menu Bantuan)
+  const customKey = typeof window !== 'undefined' ? localStorage.getItem('CUSTOM_GEMINI_API_KEY') : null;
+
+  // 2. Jika ada Custom Key, gunakan itu. Jika tidak, gunakan Env Variable.
+  const apiKey = customKey || process.env.API_KEY;
 
   if (!apiKey) {
-    throw new Error("API Key tidak ditemukan. Pastikan variabel environment API_KEY telah diatur.");
+    throw new Error("API Key tidak ditemukan. Silakan atur API Key Anda di menu API Key / Bantuan.");
   }
 
   return new GoogleGenAI({ apiKey });
@@ -200,9 +203,9 @@ export const generateModule = async (data: ModuleFormData): Promise<GeneratedMod
     console.error("Gemini Error:", error);
     // Custom error message for invalid key
     if (error.message && (error.message.includes("403") || error.message.includes("API key"))) {
-      throw new Error("API Key tidak valid atau kuota habis. Pastikan API Key Anda benar.");
+      throw new Error("API Key tidak valid atau kuota habis. Silakan periksa kunci Anda di menu Bantuan.");
     }
-    throw new Error("Gagal menghubungi layanan AI. Periksa koneksi atau API Key Anda.");
+    throw new Error(`Gagal menghubungi layanan AI: ${error.message}`);
   }
 };
 
