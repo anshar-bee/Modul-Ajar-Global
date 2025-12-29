@@ -60,7 +60,7 @@ export const About: React.FC = () => {
               <Mail className="text-brand-500 mt-1 shrink-0" size={20} />
               <div>
                 <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">Email</p>
-                <p className="text-slate-800 font-medium">sditnurulkautsarbalbod@gmail.com</p>
+                <p className="text-slate-800 font-medium">muhammad.anshar.g@gmail.com</p>
               </div>
             </div>
 
