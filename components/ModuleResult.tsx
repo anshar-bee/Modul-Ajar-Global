@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { GeneratedModule } from '../types';
-import { ArrowLeft, Download, RefreshCw, Sparkles } from 'lucide-react';
+import { ArrowLeft, Download, RefreshCw, Sparkles, FileText } from 'lucide-react';
 
 interface ModuleResultProps {
   moduleData: GeneratedModule;
@@ -176,10 +176,10 @@ export const ModuleResult: React.FC<ModuleResultProps> = ({ moduleData, onReset,
         const text = line.replace('# ', '');
         elements.push(
           <div key={`h1-${i}`} className="document-header mb-8 text-center">
-            <h1 className="text-3xl font-bold uppercase tracking-wide mb-2 text-black">
+            <h1 className="text-2xl md:text-3xl font-bold uppercase tracking-wide mb-2 text-black">
               RENCANA PEMBELAJARAN MENDALAM
             </h1>
-            <div className="text-lg italic mb-6 text-black subtitle">
+            <div className="text-base md:text-lg italic mb-6 text-black subtitle">
               {parseBold(text.replace('Modul Ajar:', '').trim())}
             </div>
             {/* Garis Hitam Tebal */}
@@ -192,7 +192,7 @@ export const ModuleResult: React.FC<ModuleResultProps> = ({ moduleData, onReset,
       // Render Sub-Bab (H2)
       if (line.startsWith('## ')) {
         elements.push(
-          <h2 key={`h2-${i}`} className="text-xl font-bold mt-8 mb-4 border-b border-black pb-1 text-black">
+          <h2 key={`h2-${i}`} className="text-lg md:text-xl font-bold mt-8 mb-4 border-b border-black pb-1 text-black">
             {parseBold(line.replace('## ', ''))}
           </h2>
         );
@@ -202,7 +202,7 @@ export const ModuleResult: React.FC<ModuleResultProps> = ({ moduleData, onReset,
       // Render H3 dengan Garis Merah
       if (line.startsWith('### ')) {
         elements.push(
-          <h3 key={`h3-${i}`} className="text-lg font-bold mt-6 mb-2 text-black border-b-2 border-red-600 pb-2">
+          <h3 key={`h3-${i}`} className="text-base md:text-lg font-bold mt-6 mb-2 text-black border-b-2 border-red-600 pb-2">
             {parseBold(line.replace('### ', ''))}
           </h3>
         );
@@ -212,7 +212,7 @@ export const ModuleResult: React.FC<ModuleResultProps> = ({ moduleData, onReset,
       // Render H4
       if (line.startsWith('#### ')) {
         elements.push(
-          <h4 key={`h4-${i}`} className="text-base font-bold mt-4 mb-2 italic text-black">
+          <h4 key={`h4-${i}`} className="text-sm md:text-base font-bold mt-4 mb-2 italic text-black">
             {parseBold(line.replace('#### ', ''))}
           </h4>
         );
@@ -222,7 +222,7 @@ export const ModuleResult: React.FC<ModuleResultProps> = ({ moduleData, onReset,
       // Render H5
       if (line.startsWith('##### ')) {
         elements.push(
-          <h5 key={`h5-${i}`} className="text-base font-bold mt-4 mb-2 underline text-black">
+          <h5 key={`h5-${i}`} className="text-sm md:text-base font-bold mt-4 mb-2 underline text-black">
             {parseBold(line.replace('##### ', ''))}
           </h5>
         );
@@ -231,7 +231,7 @@ export const ModuleResult: React.FC<ModuleResultProps> = ({ moduleData, onReset,
 
       if (line.startsWith('- ')) {
         elements.push(
-          <li key={`li-${i}`} className="ml-6 list-disc mb-1 text-justify leading-[1.15] pl-2 text-black" 
+          <li key={`li-${i}`} className="ml-6 list-disc mb-1 text-justify leading-[1.3] pl-2 text-black text-sm md:text-base" 
               dangerouslySetInnerHTML={{__html: parseBold(line.replace('- ', ''))}} 
           />
         );
@@ -240,7 +240,7 @@ export const ModuleResult: React.FC<ModuleResultProps> = ({ moduleData, onReset,
 
       if (/^\d+\./.test(line)) {
         elements.push(
-          <div key={`num-${i}`} className="flex gap-2 ml-2 mb-1 text-justify leading-[1.15] text-black">
+          <div key={`num-${i}`} className="flex gap-2 ml-2 mb-1 text-justify leading-[1.3] text-black text-sm md:text-base">
              <span className="font-bold min-w-[20px]">{line.split('.')[0]}.</span>
              <span dangerouslySetInnerHTML={{__html: parseBold(line.substring(line.indexOf('.') + 1).trim())}}></span>
           </div>
@@ -255,7 +255,7 @@ export const ModuleResult: React.FC<ModuleResultProps> = ({ moduleData, onReset,
 
       // Default Paragraph
       elements.push(
-        <p key={`p-${i}`} className="mb-3 text-justify leading-[1.15] text-black"
+        <p key={`p-${i}`} className="mb-3 text-justify leading-[1.3] text-black text-sm md:text-base"
            dangerouslySetInnerHTML={{__html: parseBold(line)}} 
         />
       );
@@ -273,12 +273,12 @@ export const ModuleResult: React.FC<ModuleResultProps> = ({ moduleData, onReset,
     );
 
     return (
-      <div key={keyPrefix} className="overflow-x-auto mb-6">
-        <table className="w-full text-left border-collapse border border-black min-w-[600px]">
+      <div key={keyPrefix} className="overflow-x-auto mb-6 border border-black rounded-sm">
+        <table className="w-full text-left border-collapse min-w-[600px] md:min-w-full">
           <thead>
             <tr className="bg-slate-100 border-b border-black">
               {headers.map((h, idx) => (
-                <th key={idx} className="p-2 font-bold border-r border-black last:border-r-0 text-sm uppercase text-black">
+                <th key={idx} className="p-2 font-bold border-r border-black last:border-r-0 text-xs md:text-sm uppercase text-black whitespace-nowrap">
                   {h}
                 </th>
               ))}
@@ -288,7 +288,7 @@ export const ModuleResult: React.FC<ModuleResultProps> = ({ moduleData, onReset,
             {rows.map((row, rIdx) => (
               <tr key={rIdx} className="border-b border-black last:border-b-0">
                 {row.map((cell, cIdx) => (
-                  <td key={cIdx} className="p-2 border-r border-black last:border-r-0 text-sm align-top text-black" 
+                  <td key={cIdx} className="p-2 border-r border-black last:border-r-0 text-xs md:text-sm align-top text-black min-w-[120px]" 
                       dangerouslySetInnerHTML={{__html: parseBold(cell)}} 
                   />
                 ))}
@@ -301,7 +301,7 @@ export const ModuleResult: React.FC<ModuleResultProps> = ({ moduleData, onReset,
   };
 
   return (
-    <div className="max-w-5xl mx-auto animate-fade-in-up pb-20">
+    <div className="max-w-5xl mx-auto animate-fade-in-up pb-10">
       {/* CSS untuk Print yang Kuat */}
       <style>{`
         @media print {
@@ -339,7 +339,7 @@ export const ModuleResult: React.FC<ModuleResultProps> = ({ moduleData, onReset,
           #module-content h1, #module-content h2, #module-content h4, #module-content h5, #module-content strong, #module-content p, #module-content li, #module-content td {
              color: #000000 !important;
           }
-          /* Style khusus H3 di print agar garis merah tetap muncul (atau hitam tergantung preferensi print browser, tapi kita force) */
+          /* Style khusus H3 di print agar garis merah tetap muncul */
           #module-content h3 {
              color: #000000 !important;
              border-bottom: 2px solid #DC2626 !important;
@@ -354,41 +354,42 @@ export const ModuleResult: React.FC<ModuleResultProps> = ({ moduleData, onReset,
         }
       `}</style>
 
-      {/* Action Bar */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 no-print sticky top-20 z-40 bg-slate-50/90 backdrop-blur py-4 border-b border-slate-200 -mx-4 px-4 md:mx-0 md:px-0 md:static md:bg-transparent md:border-none md:py-0">
-        <button 
-          onClick={onReset}
-          className="flex items-center gap-2 text-slate-600 hover:text-emerald-600 transition-colors font-medium px-4 py-2 rounded-lg hover:bg-white"
-        >
-          <ArrowLeft size={20} />
-          Buat Baru
-        </button>
-
-        <div className="flex flex-wrap gap-2 md:gap-3">
-          <button 
-            onClick={handleExportWord}
-            className="flex items-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-all shadow-md shadow-emerald-200 font-medium text-sm md:text-base group"
-          >
-            <Download size={18} />
-            Download Word
-          </button>
-        </div>
+      {/* Action Bar - Responsive */}
+      <div className="flex flex-col gap-3 mb-6 no-print">
+         <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex justify-between items-center">
+             <button 
+              onClick={onReset}
+              className="flex items-center gap-2 text-slate-600 hover:text-red-600 transition-colors font-medium px-3 py-2 rounded-lg text-sm"
+            >
+              <ArrowLeft size={18} />
+              <span className="hidden md:inline">Kembali</span>
+            </button>
+            <div className="font-bold text-slate-700 text-sm md:text-base truncate max-w-[150px] md:max-w-xs">
+                {moduleData.title}
+            </div>
+             <button 
+              onClick={handleExportWord}
+              className="flex items-center gap-2 bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition-all shadow-md shadow-emerald-200 font-bold text-xs md:text-sm active:scale-95"
+            >
+              <Download size={16} />
+              <span className="hidden md:inline">Download Word</span>
+              <span className="md:hidden">Word</span>
+            </button>
+         </div>
       </div>
 
       {/* Document Container */}
-      <div className="bg-white rounded shadow-2xl overflow-hidden print-content min-h-[29.7cm] relative">
+      <div className="bg-white rounded-none md:rounded shadow-lg md:shadow-2xl overflow-hidden print-content min-h-[29.7cm] relative mx-[-1rem] md:mx-0">
         {/* Paper Texture/Effect (Hijau - Hanya Hiasan di Web) */}
-        <div className="paper-texture absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-emerald-400 to-teal-500 print:hidden"></div>
+        <div className="paper-texture absolute top-0 left-0 w-full h-1 md:h-2 bg-gradient-to-r from-emerald-400 to-teal-500 print:hidden"></div>
         
         {/* Konten Utama Dokumen */}
         <div 
             id="module-content" 
-            className="p-8 md:p-16 leading-[1.15] max-w-[21cm] mx-auto bg-white transition-all duration-300"
+            className="p-6 md:p-16 leading-[1.3] md:leading-[1.15] max-w-[21cm] mx-auto bg-white transition-all duration-300"
             style={{ 
                 fontFamily: "'Times New Roman', serif", 
-                fontSize: '12pt',
                 color: '#000000',
-                lineHeight: '1.15'
             }}
         >
            {renderContent(moduleData.content)}
@@ -396,31 +397,31 @@ export const ModuleResult: React.FC<ModuleResultProps> = ({ moduleData, onReset,
       </div>
 
       {/* Section Revisi Konten AI */}
-      <div className="mt-8 p-6 bg-slate-50 border border-slate-200 rounded-xl no-print">
+      <div className="mt-6 md:mt-8 p-4 md:p-6 bg-slate-50 border border-slate-200 rounded-xl no-print">
         <div className="flex items-center gap-3 mb-4">
-             <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600">
+             <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 shrink-0">
                 <Sparkles size={16} />
              </div>
              <div>
-                <h3 className="text-lg font-bold text-slate-800">Revisi Konten AI</h3>
-                <p className="text-sm text-slate-500">Kurang puas dengan hasilnya? Berikan instruksi untuk memperbaikinya.</p>
+                <h3 className="text-base md:text-lg font-bold text-slate-800">Revisi Konten AI</h3>
+                <p className="text-xs md:text-sm text-slate-500">Berikan instruksi untuk memperbaiki bagian tertentu.</p>
              </div>
         </div>
         
         <textarea 
             value={revisionInput}
             onChange={(e) => setRevisionInput(e.target.value)}
-            placeholder="Contoh: Tambahkan soal uraian tentang... atau Ubah rubrik penilaian menjadi lebih detail..."
-            className="w-full p-4 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 outline-none mb-4 min-h-[100px] bg-white text-slate-900"
+            placeholder="Contoh: Tambahkan soal uraian tentang..."
+            className="w-full p-4 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 outline-none mb-4 min-h-[100px] bg-white text-slate-900 text-sm md:text-base"
         />
         
         <button 
             onClick={handleRevisionSubmit}
             disabled={isRevising || !revisionInput.trim()}
-            className={`w-full py-3 rounded-lg font-bold text-white flex items-center justify-center gap-2 transition-all
+            className={`w-full py-3 rounded-lg font-bold text-white flex items-center justify-center gap-2 transition-all text-sm md:text-base
                 ${isRevising || !revisionInput.trim() 
                   ? 'bg-slate-300 cursor-not-allowed' 
-                  : 'bg-slate-700 hover:bg-slate-800 shadow-lg shadow-slate-200'}
+                  : 'bg-slate-700 hover:bg-slate-800 shadow-lg shadow-slate-200 active:scale-95'}
             `}
         >
             {isRevising ? (
@@ -429,7 +430,7 @@ export const ModuleResult: React.FC<ModuleResultProps> = ({ moduleData, onReset,
                 </>
             ) : (
                 <>
-                   <RefreshCw className="w-5 h-5" /> Tambahkan ke Input & Regenerate
+                   <RefreshCw className="w-5 h-5" /> Regenerate
                 </>
             )}
         </button>

@@ -161,21 +161,21 @@ const App: React.FC = () => {
     }
 
     return (
-      <div className="max-w-4xl mx-auto space-y-12">
+      <div className="max-w-4xl mx-auto space-y-8 md:space-y-12">
         <Hero />
         
-        <div id="generator-form" className="bg-white rounded-2xl shadow-xl p-6 md:p-10 border border-slate-100 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-brand-400 to-brand-600"></div>
+        <div id="generator-form" className="bg-white rounded-xl md:rounded-2xl shadow-lg md:shadow-xl p-4 md:p-10 border border-slate-100 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-1.5 md:h-2 bg-gradient-to-r from-brand-400 to-brand-600"></div>
           
-          <div className="mb-8">
-            <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-2">Mulai Buat Modul</h2>
-            <p className="text-slate-600">Isi detail pembelajaran di bawah ini dan biarkan AI menyusunnya untuk Anda.</p>
+          <div className="mb-6 md:mb-8">
+            <h2 className="text-xl md:text-3xl font-bold text-slate-800 mb-2">Mulai Buat Modul</h2>
+            <p className="text-sm md:text-base text-slate-600">Isi detail pembelajaran di bawah ini dan biarkan AI menyusunnya untuk Anda.</p>
           </div>
 
           {error && (
             <div className="mb-6 bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg flex items-start gap-3">
               <AlertCircle className="w-5 h-5 mt-0.5 flex-shrink-0" />
-              <p>{error}</p>
+              <p className="text-sm">{error}</p>
             </div>
           )}
 
@@ -185,9 +185,9 @@ const App: React.FC = () => {
                 <div className="absolute inset-0 bg-brand-200 rounded-full blur-xl opacity-50 animate-pulse"></div>
                 <Loader2 className="w-16 h-16 text-brand-600 animate-spin relative z-10" />
               </div>
-              <div className="space-y-2">
+              <div className="space-y-2 px-4">
                 <h3 className="text-xl font-bold text-slate-800">Sedang Meracik Modul Ajar...</h3>
-                <p className="text-slate-500 max-w-md mx-auto">AI kami sedang menganalisis Capaian Pembelajaran dan menyusun kegiatan yang menarik untuk siswa Anda.</p>
+                <p className="text-sm text-slate-500 max-w-md mx-auto">AI kami sedang menganalisis Capaian Pembelajaran dan menyusun kegiatan yang menarik untuk siswa Anda.</p>
               </div>
             </div>
           ) : (
@@ -231,11 +231,15 @@ const App: React.FC = () => {
         onAdminOverride={() => setCurrentView('admin')}
       />
       
-      <main className="flex-grow container mx-auto px-4 py-8 md:py-12">
+      {/* Added pb-20 for Mobile Bottom Nav spacing */}
+      <main className="flex-grow container mx-auto px-4 py-6 md:py-12 pb-24 md:pb-12">
         {renderContent()}
       </main>
 
-      <Footer />
+      {/* Footer hidden on mobile to save space, or just keep it */}
+      <div className="hidden md:block">
+        <Footer />
+      </div>
     </div>
   );
 };

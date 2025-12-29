@@ -2,7 +2,7 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>AI Teman Guru | Generator Modul Pembelajaran Otomatis</title>
     <meta name="description" content="AI Teman Guru - Generator Modul Pembelajaran Mendalam Otomatis untuk guru Indonesia. Buat modul ajar lengkap dengan mudah.">
     
@@ -43,14 +43,15 @@
       body {
         font-family: 'Plus Jakarta Sans', sans-serif;
         background-color: #f8fafc;
+        -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
       }
       h1, h2, h3, h4, h5, h6 {
         font-family: 'Playfair Display', serif;
       }
       /* Custom Scrollbar */
       ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
+        width: 6px;
+        height: 6px;
       }
       ::-webkit-scrollbar-track {
         background: #f1f1f1; 
@@ -59,8 +60,14 @@
         background: #cbd5e1; 
         border-radius: 4px;
       }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #94a3b8; 
+      
+      /* Hide scrollbar for clean horizontal scrolling on mobile */
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
       }
 
       /* Print Styles for PDF Export */
